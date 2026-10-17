@@ -115,9 +115,59 @@ footer { padding:30px 0 50px; text-align:center; font-size:.85rem; color:var(--s
 .cond li { padding:14px 0; border-bottom:1px solid #f1e8dc; font-size:.93rem; }
 .cond li:last-child { border-bottom:none; }
 .cond b { color:var(--coral); }
+
+/* ===== EFECTOS PREMIUM ===== */
+body::before { content:''; position:fixed; inset:0; z-index:90; pointer-events:none; opacity:.05; mix-blend-mode:multiply; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); }
+#progreso { position:fixed; top:0; left:0; width:100%; height:3px; transform-origin:0 50%; transform:scaleX(0); background:linear-gradient(90deg,var(--coral),var(--lila)); z-index:100; }
+nav { transition:box-shadow .3s; } nav .wrap { transition:height .3s; }
+nav.scrolled .wrap { height:54px; } nav.scrolled { box-shadow:0 6px 24px rgba(29,26,43,.08); }
+
+.hero { position:relative; overflow:hidden; } .hero .wrap { position:relative; z-index:1; }
+.blobs { position:absolute; inset:0; z-index:0; pointer-events:none; }
+.blobs i { position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; animation:deriva 14s ease-in-out infinite alternate; }
+.blobs i:nth-child(1) { width:380px; height:380px; background:#ffb199; top:-80px; left:-60px; }
+.blobs i:nth-child(2) { width:420px; height:420px; background:var(--lila); right:-100px; top:60px; animation-delay:-5s; }
+.blobs i:nth-child(3) { width:300px; height:300px; background:#ffd9a8; bottom:-100px; left:40%; animation-delay:-9s; }
+@keyframes deriva { to { transform:translate(60px,40px) scale(1.15); } }
+
+.w { display:inline-block; opacity:0; transform:translateY(.6em) rotateX(-40deg); animation:palabra .8s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:calc(var(--i) * 70ms + 200ms); }
+@keyframes palabra { to { opacity:1; transform:none; } }
+
+.phone-wrap { position:relative; display:flex; justify-content:center; padding:20px 0; perspective:1000px; }
+.flota { animation:flota 6s ease-in-out infinite; }
+@keyframes flota { 50% { transform:translateY(-14px); } }
+.phone { position:relative; transform:rotateY(var(--ry,-12deg)) rotateX(var(--rx,6deg)) rotateZ(3deg); transition:transform .15s ease-out; }
+.phone::after { content:''; position:absolute; inset:10px; border-radius:30px; pointer-events:none; background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.25) 45%,transparent 60%); transform:translateX(var(--gx,0%)); }
+.chip { position:absolute; z-index:3; background:rgba(255,255,255,.92); backdrop-filter:blur(6px); border:1px solid #eadfd2; border-radius:14px; padding:10px 14px; font-size:.78rem; font-weight:500; box-shadow:0 10px 30px rgba(29,26,43,.15); animation:flota 5s ease-in-out infinite; white-space:nowrap; }
+.chip.c1 { top:50px; left:0; } .chip.c2 { top:48%; right:0; animation-delay:-2s; } .chip.c3 { bottom:60px; left:8px; animation-delay:-3.5s; }
+
+.marquee { background:var(--tinta); color:var(--crema); overflow:hidden; padding:18px 0; }
+.marquee-track { display:flex; width:max-content; animation:cinta 32s linear infinite; }
+.marquee-track span { font-family:'Fraunces',serif; font-style:italic; font-size:1.5rem; padding:0 28px; white-space:nowrap; }
+.marquee-track span::after { content:'✦'; color:var(--coral); margin-left:56px; font-style:normal; }
+@keyframes cinta { to { transform:translateX(-50%); } }
+
+.tilt { transition:transform .2s ease, opacity .7s ease !important; will-change:transform; }
+.spot { position:relative; overflow:hidden; }
+.spot::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,122,89,.2),transparent 65%); }
+.spot:hover::before { opacity:1; }
+.oscura { position:relative; overflow:hidden; } .oscura .wrap { position:relative; z-index:1; }
+.oscura::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(600px circle at var(--gx,70%) var(--gy,0%),rgba(255,122,89,.16),transparent 60%); }
+
+.btn { position:relative; overflow:hidden; }
+.btn::after { content:''; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent); transform:skewX(-20deg); }
+.btn:hover::after { left:130%; transition:left .7s ease; }
+
+.carrusel { padding-top:28px; }
+.cel { perspective:800px; }
+.marco { transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+.cel:hover .marco { transform:translateY(-12px) rotateY(-8deg) rotateX(3deg); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } .rev, .w { opacity:1 !important; transform:none !important; } }
 </style>
 </head>
 <body>
+<div id="progreso"></div>
 
 <nav>
   <div class="wrap">
@@ -133,6 +183,7 @@ footer { padding:30px 0 50px; text-align:center; font-size:.85rem; color:var(--s
 </nav>
 
 <header class="hero">
+  <div class="blobs"><i></i><i></i><i></i></div>
   <div class="wrap">
     <div class="rev">
       <span class="etiqueta">✨ Invitaciones web para XV, bodas y cumpleaños</span>
@@ -144,7 +195,7 @@ footer { padding:30px 0 50px; text-align:center; font-size:.85rem; color:var(--s
       </div>
     </div>
     <div class="rev">
-      <div class="phone">
+      <div class="phone-wrap"><div class="flota"><div class="phone">
         <div class="pantalla">
           <small>MIS XV</small>
           <h3 id="demo-nombre"></h3>
@@ -154,9 +205,18 @@ footer { padding:30px 0 50px; text-align:center; font-size:.85rem; color:var(--s
           <div class="fake">CONFIRMAR ASISTENCIA</div>
         </div>
       </div>
+      </div>
+      <span class="chip c1">✅ Valentina confirmó · 3 personas</span>
+      <span class="chip c2">🎵 Suena tu canción favorita</span>
+      <span class="chip c3">⏳ Faltan 42 días</span>
+      </div>
     </div>
   </div>
 </header>
+
+<div class="marquee"><div class="marquee-track">
+  <span>Cuenta regresiva</span><span>Confirmación en vivo</span><span>Música de fondo</span><span>Trivia interactiva</span><span>Regalos</span><span>Mapa del salón</span><span>Panel privado</span>
+</div></div>
 
 <section id="como">
   <div class="wrap">
@@ -253,5 +313,6 @@ footer { padding:30px 0 50px; text-align:center; font-size:.85rem; color:var(--s
 <a class="wa-flotante" data-wa="Hola! Quiero info sobre las invitaciones" aria-label="WhatsApp">💬</a>
 
 <script src="./js/app.js"></script>
+<script src="./js/efectos.js"></script>
 </body>
 </html>
