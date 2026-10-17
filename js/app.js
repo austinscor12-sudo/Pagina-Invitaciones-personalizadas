@@ -1,6 +1,6 @@
 // ============ TODO LO QUE TENÉS QUE EDITAR ESTÁ ACÁ ARRIBA ============
 const CONFIG = {
-    marca: "Medina Invitaciones",          // nombre de tu marca (cambialo cuando elijas el definitivo)
+    marca: "Umbral Invitaciones",         // nombre de tu marca
     whatsapp: "5493794860604",            // 549 + código de área + número, sin + ni espacios
     instagram: "eqmedina04",                // tu usuario de Instagram, sin @
     demoUrl: "https://demo-invitacion-two.vercel.app/",                         // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
@@ -45,6 +45,9 @@ const FAQ = [
 const wa = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
 
 document.querySelectorAll('[data-marca]').forEach(e => e.textContent = CONFIG.marca);
+// logo: primera palabra grande, el resto chico debajo
+const lg = document.querySelector('.logo');
+if (lg) { const p = CONFIG.marca.split(' '); lg.innerHTML = `<span>${p[0]}</span>` + (p.length > 1 ? `<small>${p.slice(1).join(' ')}</small>` : ''); }
 document.querySelectorAll('[data-wa]').forEach(e => { e.href = wa(e.dataset.wa); e.target = '_blank'; e.rel = 'noopener'; });
 document.title = CONFIG.marca + ' · Invitaciones digitales para eventos';
 document.getElementById('anio').textContent = new Date().getFullYear();
