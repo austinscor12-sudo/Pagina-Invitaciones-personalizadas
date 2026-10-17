@@ -3,7 +3,7 @@ const CONFIG = {
     marca: "Umbral Invitaciones",         // nombre de tu marca
     whatsapp: "5493794860604",            // 549 + código de área + número, sin + ni espacios
     instagram: "eqmedina04",                // tu usuario de Instagram, sin @
-    demoUrl: "https://demo-invitacion-two.vercel.app/",                         // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
+    demoUrl: "https://demo.umbralinvitaciones.workers.dev/",                     // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
     demoNombre: "SOFÍA",
     demoFecha: "2027-03-20T21:00:00"
 };
