@@ -1,24 +1,24 @@
 // ============ TODO LO QUE TENÉS QUE EDITAR ESTÁ ACÁ ARRIBA ============
 const CONFIG = {
-    marca: "Estampa",                     // nombre de tu marca
-    whatsapp: "5493790000000",            // tu número: 549 + código de área + número, sin + ni espacios
-    instagram: "estampa.invitaciones",    // tu usuario de Instagram, sin @
-    demoUrl: "#",                         // link de tu invitación de ejemplo (la de Lizul en Vercel)
-    demoNombre: "LIZUL",
+    marca: "Medina Invitaciones",          // nombre de tu marca (cambialo cuando elijas el definitivo)
+    whatsapp: "5493794860604",            // 549 + código de área + número, sin + ni espacios
+    instagram: "eqmedina04",                // tu usuario de Instagram, sin @
+    demoUrl: "#",                         // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
+    demoNombre: "SOFÍA",
     demoFecha: "2026-11-06T22:30:00"
 };
 
 const PLANES = [
     {
-        nombre: "Esencial", precio: "$00.000", destacado: false,
+        nombre: "Esencial", precio: "$25.000", destacado: false,
         items: ["Diseño personalizado", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Confirmación por WhatsApp", "Envíos ilimitados"]
     },
     {
-        nombre: "Con panel", precio: "$00.000", destacado: true,
+        nombre: "Con panel", precio: "$35.000", destacado: true,
         items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel"]
     },
     {
-        nombre: "Experiencia total", precio: "$00.000", destacado: false,
+        nombre: "Experiencia total", precio: "$45.000", destacado: false,
         items: ["Todo lo del plan Con panel", "Trivia interactiva personalizada", "Álbum de fotos con QR", "Invitación con el nombre de cada invitado", "Ajustes ilimitados antes del evento"]
     }
 ];
@@ -50,10 +50,13 @@ const wa = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(
 
 document.querySelectorAll('[data-marca]').forEach(e => e.textContent = CONFIG.marca);
 document.querySelectorAll('[data-wa]').forEach(e => { e.href = wa(e.dataset.wa); e.target = '_blank'; e.rel = 'noopener'; });
+document.title = CONFIG.marca + ' · Invitaciones digitales para eventos';
 document.getElementById('anio').textContent = new Date().getFullYear();
 document.getElementById('link-ig').href = 'https://instagram.com/' + CONFIG.instagram;
 document.getElementById('demo-nombre').textContent = CONFIG.demoNombre;
-['btn-demo', 'btn-demo2'].forEach(id => { const b = document.getElementById(id); b.href = CONFIG.demoUrl; b.target = '_blank'; b.rel = 'noopener'; });
+const hayDemo = CONFIG.demoUrl && CONFIG.demoUrl !== '#';
+['btn-demo', 'btn-demo2'].forEach(id => { const b = document.getElementById(id); b.href = CONFIG.demoUrl; b.target = '_blank'; b.rel = 'noopener'; if (!hayDemo) b.style.display = 'none'; });
+if (!hayDemo) document.getElementById('seccion-demo').style.display = 'none';
 
 document.getElementById('grid-features').innerHTML = FEATURES.map(([i, t, d]) =>
     `<div class="feat rev"><div class="ico">${i}</div><h3>${t}</h3><p>${d}</p></div>`).join('');
