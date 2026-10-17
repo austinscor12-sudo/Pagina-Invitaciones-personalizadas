@@ -11,15 +11,11 @@ const CONFIG = {
 const PLANES = [
     {
         nombre: "Esencial", precio: "$25.000", destacado: false,
-        items: ["Diseño personalizado", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Confirmación por WhatsApp", "Envíos ilimitados"]
+        items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"]
     },
     {
         nombre: "Con panel", precio: "$35.000", destacado: true,
-        items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel"]
-    },
-    {
-        nombre: "Experiencia total", precio: "$45.000", destacado: false,
-        items: ["Todo lo del plan Con panel", "Trivia interactiva personalizada", "Álbum de fotos con QR", "Invitación con el nombre de cada invitado", "Ajustes ilimitados antes del evento"]
+        items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"]
     }
 ];
 
@@ -37,12 +33,12 @@ const FEATURES = [
 ];
 
 const FAQ = [
-    ["¿Cuánto tarda en estar lista?", "Depende de la cantidad de secciones, pero normalmente en pocos días desde que recibimos todo el material. Consultanos por urgencias."],
+    ["¿Cuánto tarda en estar lista?", "Hasta 5 días hábiles desde que recibimos todo el material. Si la necesitás antes, consultanos."],
     ["¿Tengo que pagar por cada invitado?", "No. Pagás un único valor según el plan y la mandás a todas las personas que quieras."],
     ["¿Cómo la comparto?", "Te damos un link. Lo mandás por WhatsApp, Instagram o donde prefieras."],
     ["¿Cómo veo quién confirmó?", "Con el plan Con panel o superior, tenés una página privada con usuario y contraseña donde ves las confirmaciones al instante."],
     ["¿Puedo pedir cambios después?", "Sí. Al ser una página web, podemos actualizar horarios, ubicación o cualquier dato y se ve al momento."],
-    ["¿Cómo se paga?", "Con una seña para empezar y el saldo al entregar. Coordinamos los medios de pago por WhatsApp."]
+    ["¿Cómo se paga?", "Con una seña del 50% para reservar y empezar, y el 50% restante al entregar. Coordinamos el medio de pago por WhatsApp."]
 ];
 
 // ============ LÓGICA (no hace falta tocar) ============
