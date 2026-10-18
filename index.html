@@ -188,6 +188,34 @@ nav.scrolled .wrap { height:54px; } nav.scrolled { box-shadow:0 6px 24px rgba(29
 .estado.ok { color:#2f7a4d; } .estado.mal { color:#c0504d; }
 .legal { font-size:.75rem; color:var(--suave); margin-top:12px; }
 .trampa { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+/* ===== PORTADA CON VIDEO + MENÚ TRANSPARENTE ===== */
+html { scroll-padding-top:70px; }
+nav { position:fixed; top:0; left:0; right:0; background:transparent; backdrop-filter:none; border-bottom:1px solid transparent; transition:background .3s, box-shadow .3s, border-color .3s; }
+nav:not(.scrolled) .logo span, nav:not(.scrolled) .logo small, nav:not(.scrolled) .links a:not(.btn) { color:#fff; }
+nav.scrolled { background:rgba(250,246,240,.92); backdrop-filter:blur(10px); border-bottom-color:#eadfd2; }
+nav .links a:not(.btn) { position:relative; }
+nav .links a:not(.btn)::after { content:''; position:absolute; left:0; bottom:-6px; width:100%; height:2px; background:var(--coral); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scaleX(1); }
+
+.hero { background:#14121f; min-height:min(94vh,860px); display:flex; align-items:center; padding:120px 0 90px; color:#fff; }
+.hero .wrap { width:100%; }
+.hero-video { position:absolute; inset:0; z-index:1; overflow:hidden; }
+.hero-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.1); transition:opacity 1.2s ease, transform 9s linear; }
+.hero-video video.activo { opacity:1; transform:scale(1); }
+.hero-velo { position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,rgba(20,18,31,.6),rgba(20,18,31,.4) 45%,rgba(20,18,31,.8)); }
+.hero .wrap { z-index:3; }
+.blobs { z-index:0; } .blobs i { opacity:.28; }
+.hero h1 { color:#fff; text-shadow:0 2px 30px rgba(0,0,0,.35); }
+.hero p { color:#e6e2f0; }
+.rota { display:inline-block; transition:opacity .35s, transform .35s; }
+.rota.sale { opacity:0; transform:translateY(-.3em); }
+.hero .btn.sec { color:#fff; border-color:rgba(255,255,255,.7); }
+.hero .btn.sec:hover { background:rgba(255,255,255,.12); }
+.bajar { position:absolute; left:50%; bottom:22px; z-index:3; width:24px; height:44px; margin-left:-12px; border:1.5px solid rgba(255,255,255,.7); border-radius:14px; }
+.bajar i { position:absolute; left:50%; top:8px; width:4px; height:8px; margin-left:-2px; border-radius:2px; background:#fff; animation:punto 1.8s ease-in-out infinite; }
+@keyframes punto { 0% { opacity:0; transform:translateY(0); } 30% { opacity:1; } 100% { opacity:0; transform:translateY(16px); } }
+@media(max-width:700px){ .bajar { display:none; } }
 </style>
 </head>
 <body>
@@ -208,10 +236,16 @@ nav.scrolled .wrap { height:54px; } nav.scrolled { box-shadow:0 6px 24px rgba(29
 
 <header class="hero">
   <div class="blobs"><i></i><i></i><i></i></div>
+  <div class="hero-video" aria-hidden="true">
+    <video muted playsinline preload="auto" data-evento="XV" src="./video/hero-xv.mp4"></video>
+    <video muted playsinline preload="metadata" data-evento="boda" src="./video/hero-boda.mp4"></video>
+    <video muted playsinline preload="metadata" data-evento="cumpleaños" src="./video/hero-cumple.mp4"></video>
+  </div>
+  <div class="hero-velo"></div>
   <div class="wrap">
     <div class="rev">
       <span class="etiqueta">✨ Invitaciones web para XV, bodas y cumpleaños</span>
-      <h1>Tu fiesta empieza con una <em>invitación</em> que se vive</h1>
+      <h1>Tu <em class="rota" id="rota">XV</em> empieza con una invitación que se vive</h1>
       <p>Música, cuenta regresiva, mapa, confirmación de asistencia y trivia, todo en un solo link que tus invitados reciben por WhatsApp.</p>
       <div class="botones">
         <a class="btn" data-wa="Hola! Quiero encargar mi invitación digital">Quiero la mía</a>
@@ -236,6 +270,7 @@ nav.scrolled .wrap { height:54px; } nav.scrolled { box-shadow:0 6px 24px rgba(29
       </div>
     </div>
   </div>
+  <a href="#como" class="bajar" aria-label="Bajar"><i></i></a>
 </header>
 
 <div class="marquee"><div class="marquee-track">
@@ -371,6 +406,7 @@ nav.scrolled .wrap { height:54px; } nav.scrolled { box-shadow:0 6px 24px rgba(29
 
 <script src="./js/app.js"></script>
 <script src="./js/efectos.js"></script>
+<script src="./js/hero.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="./js/consultas.js"></script>
