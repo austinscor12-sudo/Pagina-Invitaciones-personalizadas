@@ -3,21 +3,42 @@ const CONFIG = {
     marca: "Umbral Invitaciones",         // nombre de tu marca
     whatsapp: "5493794860604",            // 549 + código de área + número, sin + ni espacios
     instagram: "eqmedina04",                // tu usuario de Instagram, sin @
-    demoUrl: "https://demo.umbralinvitaciones.workers.dev/",                     // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
+    demoUrl: "https://demo.umbralinvitaciones.workers.dev/",                         // link de una invitación DE MUESTRA (con datos falsos). Dejalo en "#" y la sección se oculta
     demoNombre: "SOFÍA",
     demoFecha: "2027-03-20T21:00:00"
 };
 
-const PLANES = [
-    {
-        nombre: "Esencial", precio: "$25.000", destacado: false,
-        items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"]
-    },
-    {
-        nombre: "Con panel", precio: "$35.000", destacado: true,
-        items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"]
-    }
-];
+const EVENTOS = [['xv', 'XV años'], ['boda', 'Bodas'], ['cumple', 'Cumpleaños']];
+const NOMBRE_EVENTO = { xv: 'XV años', boda: 'boda', cumple: 'cumpleaños' };
+
+// Precios y planes por tipo de evento (editá los valores a gusto)
+const PLANES_POR_EVENTO = {
+    xv: [
+        { nombre: "Esencial", precio: "$25.000", destacado: false,
+          items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
+        { nombre: "Con panel", precio: "$35.000", destacado: true,
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+    ],
+    boda: [
+        { nombre: "Esencial", precio: "$30.000", destacado: false,
+          items: ["Diseño personalizado con la historia de la pareja", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva sobre los novios", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
+        { nombre: "Con panel", precio: "$42.000", destacado: true,
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+    ],
+    cumple: [
+        { nombre: "Esencial", precio: "$20.000", destacado: false,
+          items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
+        { nombre: "Con panel", precio: "$28.000", destacado: true,
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+    ]
+};
+
+// Imágenes y video de la galería por evento (si un archivo no existe, se ve un cartel "muy pronto")
+const GALERIA = {
+    xv:     { video: './video/demo.mp4',        imgs: [['./img/captura1.png', 'Portada'], ['./img/captura2.png', 'Cuenta regresiva'], ['./img/captura3.png', 'Regalos'], ['./img/captura4.png', 'Trivia']] },
+    boda:   { video: './video/demo-boda.mp4',   imgs: [['./img/boda1.png', 'Portada'], ['./img/boda2.png', 'Cuenta regresiva'], ['./img/boda3.png', 'Regalos'], ['./img/boda4.png', 'Trivia']] },
+    cumple: { video: './video/demo-cumple.mp4', imgs: [['./img/cumple1.png', 'Portada'], ['./img/cumple2.png', 'Cuenta regresiva'], ['./img/cumple3.png', 'Regalos'], ['./img/cumple4.png', 'Trivia']] }
+};
 
 const FEATURES = [
     ["🎵", "Música de fondo", "El tema que elijas suena al abrir la invitación."],
@@ -60,14 +81,55 @@ if (!hayDemo) document.getElementById('seccion-demo').style.display = 'none';
 document.getElementById('grid-features').innerHTML = FEATURES.map(([i, t, d]) =>
     `<div class="feat rev"><div class="ico">${i}</div><h3>${t}</h3><p>${d}</p></div>`).join('');
 
-document.getElementById('grid-planes').innerHTML = PLANES.map(p =>
+function crearTabs(contenedor, alElegir) {
+    contenedor.innerHTML = EVENTOS.map(([k, t], i) => `<button class="tab ${i === 0 ? 'activo' : ''}" data-k="${k}">${t}</button>`).join('');
+    contenedor.addEventListener('click', (e) => {
+        const b = e.target.closest('.tab'); if (!b) return;
+        contenedor.querySelectorAll('.tab').forEach(x => x.classList.toggle('activo', x === b));
+        alElegir(b.dataset.k);
+    });
+}
+
+// PLANES: una grilla por tipo de evento, se muestra la que elegís en las pestañas
+const gridPlanes = document.getElementById('grid-planes');
+gridPlanes.innerHTML = EVENTOS.map(([k], i) =>
+    `<div class="planes" data-ev="${k}" ${i ? 'hidden' : ''}>` + PLANES_POR_EVENTO[k].map(p =>
     `<div class="plan rev ${p.destacado ? 'top' : ''}">
         <h3>${p.nombre}</h3>
         <div class="desde">Pago único</div>
         <div class="precio">${p.precio}</div>
         <ul>${p.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        <a class="btn ${p.destacado ? '' : 'sec'}" href="${wa('Hola! Me interesa el plan ' + p.nombre)}" target="_blank" rel="noopener">Quiero este plan</a>
-    </div>`).join('');
+        <a class="btn ${p.destacado ? '' : 'sec'}" href="${wa('Hola! Me interesa el plan ' + p.nombre + ' para ' + NOMBRE_EVENTO[k])}" target="_blank" rel="noopener">Quiero este plan</a>
+    </div>`).join('') + '</div>').join('');
+crearTabs(document.getElementById('tabs-planes'), (k) => gridPlanes.querySelectorAll('.planes').forEach(g => { g.hidden = g.dataset.ev !== k; }));
+
+// GALERÍA: un carrusel por evento
+const carruseles = document.getElementById('carruseles');
+const cartel = (k) => { const d = document.createElement('div'); d.className = 'ph'; d.textContent = 'Ejemplo de ' + NOMBRE_EVENTO[k] + ' · muy pronto'; return d; };
+EVENTOS.forEach(([k], i) => {
+    const g = GALERIA[k], c = document.createElement('div');
+    c.className = 'carrusel rev'; c.dataset.ev = k; if (i) c.hidden = true;
+    [['video', g.video, 'En movimiento'], ...g.imgs.map(([s, t]) => ['img', s, t])].forEach(([tipo, src, texto]) => {
+        const fig = document.createElement('figure'); fig.className = 'cel';
+        const marco = document.createElement('div'); marco.className = 'marco';
+        let el;
+        if (tipo === 'video') { el = document.createElement('video'); el.muted = true; el.loop = true; el.playsInline = true; el.preload = 'metadata'; el.setAttribute('muted', ''); el.setAttribute('playsinline', ''); }
+        else { el = document.createElement('img'); el.alt = texto; el.loading = 'lazy'; }
+        el.addEventListener('error', () => el.replaceWith(cartel(k)));
+        el.src = src;
+        const pie = document.createElement('figcaption'); pie.textContent = texto;
+        marco.appendChild(el); fig.append(marco, pie); c.appendChild(fig);
+    });
+    carruseles.appendChild(c);
+});
+function reproducirVisibles(k) {
+    carruseles.querySelectorAll('video').forEach(v => { if (v.closest('.carrusel').dataset.ev === k) v.play().catch(() => {}); else v.pause(); });
+}
+crearTabs(document.getElementById('tabs-galeria'), (k) => {
+    carruseles.querySelectorAll('.carrusel').forEach(c => { c.hidden = c.dataset.ev !== k; });
+    reproducirVisibles(k);
+});
+reproducirVisibles('xv');
 
 document.getElementById('lista-faq').innerHTML = FAQ.map(([q, a]) =>
     `<details class="rev"><summary>${q}</summary><p>${a}</p></details>`).join('');

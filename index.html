@@ -216,6 +216,14 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
 .bajar i { position:absolute; left:50%; top:8px; width:4px; height:8px; margin-left:-2px; border-radius:2px; background:#fff; animation:punto 1.8s ease-in-out infinite; }
 @keyframes punto { 0% { opacity:0; transform:translateY(0); } 30% { opacity:1; } 100% { opacity:0; transform:translateY(16px); } }
 @media(max-width:700px){ .bajar { display:none; } }
+
+/* PESTAÑAS POR EVENTO */
+[hidden] { display:none !important; }
+.tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0 auto 30px; }
+.tab { font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:500; padding:10px 22px; border-radius:30px; border:1px solid #d9cdbd; background:#fff; color:var(--tinta); cursor:pointer; transition:all .25s; }
+.tab:hover { border-color:var(--coral); }
+.tab.activo { background:var(--tinta); border-color:var(--tinta); color:#fff; }
+.ph { aspect-ratio:9/19; border-radius:23px; background:linear-gradient(160deg,#7b94a8,#4a5f73); color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; line-height:1.8; }
 </style>
 </head>
 <body>
@@ -292,15 +300,10 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
 <section id="galeria" style="padding-top:0">
   <div class="wrap">
     <h2 class="rev">Así se ve <em>por dentro</em></h2>
-    <p class="sub rev">Música, cuenta regresiva, regalos y trivia, todo en una sola invitación.</p>
+    <p class="sub rev">Música, cuenta regresiva, regalos y trivia, todo en una sola invitación. Elegí el tipo de evento.</p>
   </div>
-  <div class="carrusel rev">
-    <figure class="cel"><div class="marco"><video src="./video/demo.mp4" autoplay muted loop playsinline preload="metadata"></video></div><figcaption>En movimiento</figcaption></figure>
-    <figure class="cel"><div class="marco"><img src="./img/captura1.png" alt="Portada de la invitación" loading="lazy"></div><figcaption>Portada</figcaption></figure>
-    <figure class="cel"><div class="marco"><img src="./img/captura2.png" alt="Cuenta regresiva" loading="lazy"></div><figcaption>Cuenta regresiva</figcaption></figure>
-    <figure class="cel"><div class="marco"><img src="./img/captura3.png" alt="Sección de regalos" loading="lazy"></div><figcaption>Regalos</figcaption></figure>
-    <figure class="cel"><div class="marco"><img src="./img/captura4.png" alt="Trivia interactiva" loading="lazy"></div><figcaption>Trivia</figcaption></figure>
-  </div>
+  <div class="tabs rev" id="tabs-galeria"></div>
+  <div id="carruseles"></div>
 </section>
 
 <section id="incluye" class="oscura">
@@ -315,7 +318,8 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
   <div class="wrap">
     <h2 class="rev">Elegí tu <em>plan</em></h2>
     <p class="sub rev">Pago único, sin cobros por invitado enviado.</p>
-    <div class="planes" id="grid-planes"></div>
+    <div class="tabs rev" id="tabs-planes"></div>
+    <div id="grid-planes"></div>
     <p class="proximo">✨ Muy pronto: álbum de fotos con QR e invitación con el nombre de cada invitado.</p>
   </div>
 </section>
