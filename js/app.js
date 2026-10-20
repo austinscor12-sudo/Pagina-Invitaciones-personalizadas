@@ -17,19 +17,19 @@ const PLANES_POR_EVENTO = {
         { nombre: "Esencial", precio: "$25.000", destacado: false,
           items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$35.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "*Confirmación dentro de la invitación", "*Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "*Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ],
     boda: [
         { nombre: "Esencial", precio: "$30.000", destacado: false,
           items: ["Diseño personalizado con la historia de la pareja", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva sobre los novios", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$42.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "*Confirmación dentro de la invitación", "*Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "*Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ],
     cumple: [
         { nombre: "Esencial", precio: "$20.000", destacado: false,
           items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$28.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "*Confirmación dentro de la invitación", "*Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "*Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ]
 };
 
@@ -159,7 +159,8 @@ gridPlanes.innerHTML = EVENTOS.map(([k], i) =>
         <h3>${p.nombre}</h3>
         <div class="desde">Pago único</div>
         <div class="precio">${p.precio}</div>
-        <ul>${p.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        <div class="sena">Reservás con <b>$${Math.round(parseInt(p.precio.replace(/\D/g, ''), 10) / 2).toLocaleString('es-AR')}</b> · el saldo al entregar</div>
+        <ul>${p.items.map(i => i[0] === '*' ? `<li class="dest"><span>${i.slice(1)}</span></li>` : `<li>${i}</li>`).join('')}</ul>
         <a class="btn ${p.destacado ? '' : 'sec'}" href="${wa('Hola! Me interesa el plan ' + p.nombre + ' para ' + NOMBRE_EVENTO[k])}" target="_blank" rel="noopener">Quiero este plan</a>
     </div>`).join('') + '</div>').join('');
 crearTabs(document.getElementById('tabs-planes'), (k) => gridPlanes.querySelectorAll('.planes').forEach(g => { g.hidden = g.dataset.ev !== k; }));
