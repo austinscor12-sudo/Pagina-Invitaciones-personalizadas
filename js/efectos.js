@@ -72,3 +72,6 @@ if (puedeHover && !sinMov) {
         osc.style.setProperty('--gx', (e.clientX - r.left) + 'px'); osc.style.setProperty('--gy', (e.clientY - r.top) + 'px');
     });
 }
+
+// Después de aparecer, las tarjetas dejan de tener retraso (para que el hover responda al instante)
+document.querySelectorAll('.rev').forEach(el => el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true }));

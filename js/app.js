@@ -41,16 +41,18 @@ const GALERIA = {
 };
 
 const FEATURES = [
-    ["🎵", "Música de fondo", "El tema que elijas suena al abrir la invitación."],
-    ["⏳", "Cuenta regresiva", "Los días, horas y minutos que faltan, en vivo."],
-    ["📍", "Ubicación", "Botón directo a Google Maps para que lleguen sin perderse."],
-    ["✅", "Confirmación", "Tus invitados confirman sin salir de la invitación."],
-    ["🎮", "Trivia", "Preguntas sobre vos para que jueguen mientras esperan."],
-    ["🎁", "Regalos", "Alias y CBU en una ventana prolija."],
-    ["👗", "Dress code", "Contales cómo vestirse para la ocasión."],
-    ["📸", "Álbum de fotos", "Tu book o las fotos que elijas, para compartir."],
-    ["🎧", "Canciones sugeridas", "Ellos proponen, vos armás la lista."],
-    ["📊", "Panel en vivo", "Mirá quién confirmó, cuántos van y qué menú necesitan."]
+    ["sobre", "Sobre de bienvenida", "Una pantalla que se abre antes de entrar a la invitación."],
+    ["music", "Música de fondo", "El tema que elijas suena al abrir la invitación."],
+    ["clock", "Cuenta regresiva", "Los días, horas y minutos que faltan, en vivo."],
+    ["pin", "Ubicación", "Botón directo a Google Maps para que lleguen sin perderse."],
+    ["check", "Confirmación", "Tus invitados confirman sin salir de la invitación."],
+    ["persona", "Links por invitado", "Cada familia recibe su link con su nombre y sus lugares."],
+    ["help", "Trivia", "Preguntas sobre vos para que jueguen mientras esperan."],
+    ["gift", "Regalos", "Alias y CBU en una ventana prolija."],
+    ["star", "Dress code", "Contales cómo vestirse para la ocasión."],
+    ["camera", "Álbum de fotos", "Un botón al álbum compartido que armes para el evento."],
+    ["head", "Canciones sugeridas", "Ellos proponen, vos armás la lista."],
+    ["chart", "Panel en vivo", "Mirá quién confirmó, cuántos van y qué menú necesitan."]
 ];
 
 const BENEFICIOS = [
@@ -69,6 +71,20 @@ const ICONOS = {
     heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
     refresh: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>'
 };
+
+Object.assign(ICONOS, {
+    sobre: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+    music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    persona: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/>',
+    help: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    gift: '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
+    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    camera: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+    head: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+    chart: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'
+});
 
 // Preguntas frecuentes por tema. Poné visible: false en un tema para ocultarlo.
 const FAQ_CATEGORIAS = [
@@ -122,8 +138,9 @@ const hayDemo = CONFIG.demoUrl && CONFIG.demoUrl !== '#';
 ['btn-demo', 'btn-demo2'].forEach(id => { const b = document.getElementById(id); b.href = CONFIG.demoUrl; b.target = '_blank'; b.rel = 'noopener'; if (!hayDemo) b.style.display = 'none'; });
 if (!hayDemo) document.getElementById('seccion-demo').style.display = 'none';
 
-document.getElementById('grid-features').innerHTML = FEATURES.map(([i, t, d]) =>
-    `<div class="feat rev"><div class="ico">${i}</div><h3>${t}</h3><p>${d}</p></div>`).join('');
+document.getElementById('grid-features').innerHTML = FEATURES.map(([ic, t, d], i) =>
+    `<div class="feat rev" style="transition-delay:${i * 70}ms"><div class="ico"><svg class="ico-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="--d:${i}">${ICONOS[ic]}</svg></div><h3>${t}</h3><p>${d}</p></div>`).join('');
+document.querySelectorAll('.ico-draw *').forEach(e => e.setAttribute('pathLength', '1'));
 
 function crearTabs(contenedor, alElegir) {
     contenedor.innerHTML = EVENTOS.map(([k, t], i) => `<button class="tab ${i === 0 ? 'activo' : ''}" data-k="${k}">${t}</button>`).join('');
