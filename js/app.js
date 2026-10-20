@@ -17,19 +17,19 @@ const PLANES_POR_EVENTO = {
         { nombre: "Esencial", precio: "$25.000", destacado: false,
           items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$35.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ],
     boda: [
         { nombre: "Esencial", precio: "$30.000", destacado: false,
           items: ["Diseño personalizado con la historia de la pareja", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva sobre los novios", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$42.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ],
     cumple: [
         { nombre: "Esencial", precio: "$20.000", destacado: false,
           items: ["Diseño personalizado con tus fotos", "Música, cuenta regresiva y mapa", "Dress code y sección de regalos", "Trivia interactiva", "Álbum de fotos con link", "Confirmación por WhatsApp", "Envíos ilimitados"] },
         { nombre: "Con panel", precio: "$28.000", destacado: true,
-          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Ajustes ilimitados hasta el evento"] }
+          items: ["Todo lo del plan Esencial", "Confirmación dentro de la invitación", "Panel privado en tiempo real", "Menús especiales y canciones sugeridas", "Descarga de la lista en Excel", "Links personalizados por invitado", "Ajustes ilimitados hasta el evento"] }
     ]
 };
 
@@ -53,13 +53,57 @@ const FEATURES = [
     ["📊", "Panel en vivo", "Mirá quién confirmó, cuántos van y qué menú necesitan."]
 ];
 
-const FAQ = [
-    ["¿Cuánto tarda en estar lista?", "Hasta 5 días hábiles desde que recibimos todo el material. Si la necesitás antes, consultanos."],
-    ["¿Tengo que pagar por cada invitado?", "No. Pagás un único valor según el plan y la mandás a todas las personas que quieras."],
-    ["¿Cómo la comparto?", "Te damos un link. Lo mandás por WhatsApp, Instagram o donde prefieras."],
-    ["¿Cómo veo quién confirmó?", "Con el plan Con panel o superior, tenés una página privada con usuario y contraseña donde ves las confirmaciones al instante."],
-    ["¿Puedo pedir cambios después?", "Sí. Al ser una página web, podemos actualizar horarios, ubicación o cualquier dato y se ve al momento."],
-    ["¿Cómo se paga?", "Con una seña del 50% para reservar y empezar, y el 50% restante al entregar. Coordinamos el medio de pago por WhatsApp."]
+const BENEFICIOS = [
+    ["link", "Un solo link", "Se comparte por WhatsApp, Instagram o donde quieras. Tus invitados no instalan nada."],
+    ["users", "Sin límite de invitados", "Pagás una vez y la enviás a todas las personas que quieras, sin costos extra por invitado."],
+    ["clock", "Lista en pocos días", "Hasta 5 días hábiles desde que recibimos tu material. Ideal si el evento está cerca."],
+    ["layers", "Todo en un mismo lugar", "Confirmación, mapa, música, regalos y trivia viven dentro de la invitación, sin formularios externos."],
+    ["heart", "Hecha a tu medida", "Diseñada con tus fotos, tu música y tus colores, según el tipo de evento."],
+    ["refresh", "Siempre actualizada", "Si cambia un horario o el lugar, lo actualizamos y todos lo ven al instante."]
+];
+const ICONOS = {
+    link: '<path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/>',
+    users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+    heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+    refresh: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>'
+};
+
+// Preguntas frecuentes por tema. Poné visible: false en un tema para ocultarlo.
+const FAQ_CATEGORIAS = [
+    { titulo: "Planes", visible: true, preguntas: [
+        ["¿Cuál es la diferencia entre los planes?", "El plan Esencial incluye la invitación completa (música, cuenta regresiva, mapa, regalos, trivia y álbum con link) y las confirmaciones te llegan por WhatsApp. El plan Con panel suma la confirmación dentro de la invitación, un panel privado para ver quién confirmó, menús especiales, canciones sugeridas, descarga en Excel, links personalizados por invitado y ajustes ilimitados hasta el evento."],
+        ["¿Cuál me conviene?", "Si preferís que tus invitados te escriban por WhatsApp, alcanza con el Esencial. Si querés llevar la lista ordenada y ver todo en un solo lugar, el plan Con panel te ahorra mucho trabajo."],
+        ["¿Cuántas fotos puedo incluir?", "Hasta 10 fotos. Si querés incluir más, consultanos y lo vemos."],
+        ["¿Puede ser una invitación sin fotos?", "Sí. Podemos armarla con fondos, colores y diseños en lugar de fotos. Consultanos cómo la imaginás."],
+        ["¿Cómo funciona el álbum de fotos?", "La invitación tiene un botón que abre el álbum compartido que vos armes, por ejemplo en Google Fotos, para que tus invitados vean y suban fotos de la fiesta."],
+        ["¿Puedo elegir los colores y la música?", "Sí. Definimos juntos las fotos, los colores y la canción de fondo antes de empezar."]
+    ]},
+    { titulo: "Confirmación", visible: true, preguntas: [
+        ["¿Cuál es la diferencia entre confirmar por WhatsApp y el sistema de confirmación?", "Con WhatsApp, el invitado te escribe y vos anotás cada respuesta. Con el sistema de confirmación, el invitado completa un formulario dentro de la propia invitación y sus datos quedan guardados en tu panel."],
+        ["¿Puedo ver quién confirmó?", "Sí, con el plan Con panel. Entrás con tu usuario y contraseña y ves en tiempo real quién asiste, cuántas personas son, los menús especiales y las canciones sugeridas. También podés descargar la lista en Excel."],
+        ["¿Cómo funcionan los links personalizados por invitado?", "Cada invitado o familia recibe su propio link, con su nombre y la cantidad de lugares reservados. Te damos una herramienta para generarlos y mandarlos por WhatsApp de a uno."]
+    ]},
+    { titulo: "Entrega", visible: true, preguntas: [
+        ["¿Cuánto tarda en estar lista?", "Hasta 5 días hábiles desde que recibimos todo el material completo (fotos, datos del evento, canción y demás)."],
+        ["¿Pueden entregarla más rápido?", "Si tu fecha está cerca, escribinos y vemos qué disponibilidad tenemos."],
+        ["¿Con cuánta anticipación conviene pedirla?", "Cuanto antes mejor: así la mandás con tiempo y tus invitados confirman sin apuros."],
+        ["¿Puedo pedir cambios después de recibirla?", "Sí. Los cambios de datos (horario, lugar, alias) se actualizan sin límite hasta el día del evento."]
+    ]},
+    { titulo: "Pagos", visible: true, preguntas: [
+        ["¿Cómo se paga?", "Con una seña del 50% para reservar y empezar, y el 50% restante al entregar."],
+        ["¿Qué medios de pago aceptan?", "Los coordinamos por WhatsApp según lo que te resulte más cómodo."],
+        ["¿Hay costos extra por invitado?", "No. Pagás un único valor y la enviás a todas las personas que quieras."]
+    ]},
+    { titulo: "En dúo", visible: true, preguntas: [
+        ["¿Qué es una invitación en dúo?", "Una sola invitación con dos festejados: dos quinceañeras, una pareja de novios, hermanos o un cumpleaños compartido. Los nombres aparecen juntos y los invitados confirman una sola vez."],
+        ["¿Cambia el precio?", "Consultanos y te pasamos el presupuesto según lo que necesites."]
+    ]},
+    // Activalo (visible: true) solo cuando ofrezcas este servicio
+    { titulo: "Save the date", visible: false, preguntas: [
+        ["¿Qué es un save the date?", "Un aviso corto que se envía antes de la invitación completa, con la fecha del evento y una cuenta regresiva, para que tus invitados reserven el día."]
+    ]}
 ];
 
 // ============ LÓGICA (no hace falta tocar) ============
@@ -131,8 +175,19 @@ crearTabs(document.getElementById('tabs-galeria'), (k) => {
 });
 reproducirVisibles('xv');
 
-document.getElementById('lista-faq').innerHTML = FAQ.map(([q, a]) =>
-    `<details class="rev"><summary>${q}</summary><p>${a}</p></details>`).join('');
+const faqVisibles = FAQ_CATEGORIAS.filter(c => c.visible);
+const tabsFaq = document.getElementById('tabs-faq'), listaFaq = document.getElementById('lista-faq');
+tabsFaq.innerHTML = faqVisibles.map((c, i) => `<button class="tab ${i === 0 ? 'activo' : ''}" data-i="${i}">${c.titulo}</button>`).join('');
+listaFaq.innerHTML = faqVisibles.map((c, i) => `<div class="faq-grupo" data-i="${i}" ${i ? 'hidden' : ''}>` +
+    c.preguntas.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('') + '</div>').join('');
+tabsFaq.addEventListener('click', (e) => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    tabsFaq.querySelectorAll('.tab').forEach(x => x.classList.toggle('activo', x === b));
+    listaFaq.querySelectorAll('.faq-grupo').forEach(g => { g.hidden = g.dataset.i !== b.dataset.i; });
+});
+
+document.getElementById('grid-beneficios').innerHTML = BENEFICIOS.map(([ic, t, d], i) =>
+    `<div class="benef rev" style="transition-delay:${i * 90}ms"><div class="benef-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONOS[ic]}</svg></div><h3>${t}</h3><p>${d}</p></div>`).join('');
 
 // cuenta regresiva del celular de muestra
 const destino = new Date(CONFIG.demoFecha).getTime();

@@ -73,7 +73,7 @@ nav .btn { padding:9px 20px; font-size:.85rem; }
 @media(min-width:860px){ .planes { grid-template-columns:repeat(3,1fr); align-items:stretch; } }
 .plan { background:#fff; border:1px solid #eadfd2; border-radius:22px; padding:32px 26px; display:flex; flex-direction:column; }
 .plan.top { border:2px solid var(--coral); position:relative; }
-.plan.top::before { content:'Más elegido'; position:absolute; top:-13px; left:26px; background:var(--coral); color:#fff; font-size:.72rem; font-weight:700; padding:4px 12px; border-radius:20px; }
+.plan.top::before { content:'Recomendado'; position:absolute; top:-13px; left:26px; background:var(--coral); color:#fff; font-size:.72rem; font-weight:700; padding:4px 12px; border-radius:20px; }
 .plan h3 { font-size:1.5rem; }
 .plan .desde { font-size:.8rem; color:var(--suave); margin-top:14px; }
 .plan .precio { font-family:'Fraunces',serif; font-size:2.4rem; margin-bottom:16px; }
@@ -224,6 +224,20 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
 .tab:hover { border-color:var(--coral); }
 .tab.activo { background:var(--tinta); border-color:var(--tinta); color:#fff; }
 .ph { aspect-ratio:9/19; border-radius:23px; background:linear-gradient(160deg,#7b94a8,#4a5f73); color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; line-height:1.8; }
+
+/* BENEFICIOS Y FAQ POR TEMAS */
+.benef-grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); }
+.benef { background:#fff; border:1px solid #eadfd2; border-radius:22px; padding:30px 26px; transition:transform .3s, box-shadow .3s, opacity .7s ease !important; }
+.benef:hover { transform:translateY(-6px); box-shadow:0 22px 44px rgba(29,26,43,.1); }
+.benef-ico { width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg,var(--coral),#ff9e7d); color:#fff; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.benef-ico svg { width:26px; height:26px; }
+.benef h3 { font-size:1.25rem; margin-bottom:8px; }
+.benef p { color:var(--suave); font-size:.94rem; }
+#faq .tabs { justify-content:flex-start; }
+.faq-grupo summary { list-style:none; display:flex; justify-content:space-between; gap:14px; align-items:center; }
+.faq-grupo summary::-webkit-details-marker { display:none; }
+.faq-grupo summary::after { content:'+'; font-size:1.4rem; color:var(--coral); line-height:1; transition:transform .25s; }
+.faq-grupo details[open] summary::after { transform:rotate(45deg); }
 </style>
 </head>
 <body>
@@ -297,6 +311,14 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
   </div>
 </section>
 
+<section id="beneficios" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="rev">Por qué <em>Umbral</em></h2>
+    <p class="sub rev">Todo pensado para que organizar tu invitación sea fácil y se vea increíble.</p>
+    <div class="benef-grid" id="grid-beneficios"></div>
+  </div>
+</section>
+
 <section id="galeria" style="padding-top:0">
   <div class="wrap">
     <h2 class="rev">Así se ve <em>por dentro</em></h2>
@@ -320,7 +342,7 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
     <p class="sub rev">Pago único, sin cobros por invitado enviado.</p>
     <div class="tabs rev" id="tabs-planes"></div>
     <div id="grid-planes"></div>
-    <p class="proximo">✨ Muy pronto: álbum de fotos con QR e invitación con el nombre de cada invitado.</p>
+    <p class="proximo">✨ Muy pronto: álbum de fotos con QR para que tus invitados suban sus fotos.</p>
   </div>
 </section>
 
@@ -356,8 +378,9 @@ nav .links a:not(.btn):hover::after, nav .links a.activo::after { transform:scal
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <h2 class="rev">Preguntas <em>frecuentes</em></h2>
-    <p class="sub rev"></p>
-    <div id="lista-faq"></div>
+    <p class="sub rev">Elegí un tema para ver las respuestas.</p>
+    <div class="tabs rev" id="tabs-faq"></div>
+    <div id="lista-faq" class="rev"></div>
   </div>
 </section>
 
